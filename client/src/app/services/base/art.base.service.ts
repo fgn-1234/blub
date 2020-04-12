@@ -66,6 +66,9 @@ import { Art } from '../../domain/blub_db/art';
  * SCHEMA DB art
  *
 	{
+		NAME: {
+			type: 'String'
+		},
 		//RELATIONS
 		//EXTERNAL RELATIONS
 	}
@@ -82,6 +85,17 @@ export class ArtBaseService {
     // CRUD METHODS
 
     /**
+    * artService.create
+    *   @description CRUD ACTION create
+    *
+    */
+    create(item: Art): Observable<Art> {
+        return this.http
+            .post<Art>(this.contextUrl, item)
+            .pipe(map(data => data));
+    }
+
+    /**
     * artService.delete
     *   @description CRUD ACTION delete
     *   @param ObjectId id Id
@@ -94,6 +108,18 @@ export class ArtBaseService {
     }
 
     /**
+    * artService.get
+    *   @description CRUD ACTION get
+    *   @param ObjectId id Id resource
+    *
+    */
+    get(id: string): Observable<Art> {
+        return this.http
+            .get<Art>(this.contextUrl + '/' + id)
+            .pipe(map(data => data));
+    }
+
+    /**
     * artService.list
     *   @description CRUD ACTION list
     *
@@ -101,6 +127,18 @@ export class ArtBaseService {
     list(): Observable<Art[]> {
         return this.http
             .get<Art[]>(this.contextUrl)
+            .pipe(map(data => data));
+    }
+
+    /**
+    * artService.update
+    *   @description CRUD ACTION update
+    *   @param ObjectId id Id
+    *
+    */
+    update(item: Art): Observable<Art> {
+        return this.http
+            .post<Art>(this.contextUrl + '/' + item._id, item)
             .pipe(map(data => data));
     }
 

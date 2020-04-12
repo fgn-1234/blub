@@ -36,6 +36,7 @@ import { CanActivate, RouterModule, Routes } from '@angular/router';
 /* START MY VIEWS IMPORT */
 // Do not edit this comment content, it will be overwritten in next Skaffolder generation
 import { HomeComponent} from './pages/home/home.component';
+import { ArtEditComponent} from './pages/art-edit/art-edit.component';
 import { ArtListComponent} from './pages/art-list/art-list.component';
 
 /* END MY VIEWS IMPORT */
@@ -56,6 +57,7 @@ const routes: Routes = [
     /* START MY VIEWS */
 
     { path: 'home',  loadChildren: './pages/home/home.module#HomeModule' , canActivate: [AuthGuard] },
+    { path: 'arts/:id',  loadChildren: './pages/art-edit/art-edit.module#ArtEditModule' , canActivate: [AuthGuard] },
     { path: 'arts',  loadChildren: './pages/art-list/art-list.module#ArtListModule' , canActivate: [AuthGuard] },
 
  /* END MY VIEWS */

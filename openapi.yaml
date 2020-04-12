@@ -287,6 +287,62 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/User"
+  /art:
+    post:
+      x-skaffolder-id: 5e92f53ec4c4454b7744abc6
+      x-skaffolder-name: create
+      x-skaffolder-id-resource: 5e927e67c4c4454b7744a8e9
+      x-skaffolder-resource: art
+      x-skaffolder-crudAction: create
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION create
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION create
+      tags:
+        - art
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/art"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                NAME:
+                  type: string
+    get:
+      x-skaffolder-id: 5e927e77c4c4454b7744a8f0
+      x-skaffolder-name: list
+      x-skaffolder-id-resource: 5e927e67c4c4454b7744a8e9
+      x-skaffolder-resource: art
+      x-skaffolder-crudAction: list
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION list
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /
+      x-skaffolder-roles: []
+      summary: CRUD ACTION list
+      tags:
+        - art
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/art"
   "/art/{id}":
     delete:
       x-skaffolder-id: 5e927e77c4c4454b7744a8ef
@@ -314,31 +370,72 @@ paths:
       responses:
         "200":
           description: OK
-  /art:
     get:
-      x-skaffolder-id: 5e927e77c4c4454b7744a8f0
-      x-skaffolder-name: list
+      x-skaffolder-id: 5e92f53ec4c4454b7744abc8
+      x-skaffolder-name: get
       x-skaffolder-id-resource: 5e927e67c4c4454b7744a8e9
       x-skaffolder-resource: art
-      x-skaffolder-crudAction: list
+      x-skaffolder-crudAction: get
       x-skaffolder-crudType: 
-      x-skaffolder-description: CRUD ACTION list
+      x-skaffolder-description: CRUD ACTION get
       x-skaffolder-returnDesc: 
       x-skaffolder-returnType: 
-      x-skaffolder-url: /
+      x-skaffolder-url: /{id}
       x-skaffolder-roles: []
-      summary: CRUD ACTION list
+      summary: CRUD ACTION get
       tags:
         - art
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id resource
+          required: true
+          schema:
+            type: string
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/art"
+                $ref: "#/components/schemas/art"
+    post:
+      x-skaffolder-id: 5e92f53ec4c4454b7744abc7
+      x-skaffolder-name: update
+      x-skaffolder-id-resource: 5e927e67c4c4454b7744a8e9
+      x-skaffolder-resource: art
+      x-skaffolder-crudAction: update
+      x-skaffolder-crudType: 
+      x-skaffolder-description: CRUD ACTION update
+      x-skaffolder-returnDesc: 
+      x-skaffolder-returnType: 
+      x-skaffolder-url: /{id}
+      x-skaffolder-roles: []
+      summary: CRUD ACTION update
+      tags:
+        - art
+      parameters:
+        - name: id
+          x-skaffolder-type: ObjectId
+          in: path
+          description: Id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/art"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/art"
 security:
   - bearerAuth: []
 components:
@@ -398,6 +495,10 @@ components:
         _id:
           type: string
           x-skaffolder-required: true
+        NAME:
+          type: string
+          x-skaffolder-id-attr: 5e92f53dc4c4454b7744abc4
+          x-skaffolder-type: String
       x-skaffolder-relations: 
       required:
         - _id
@@ -412,6 +513,19 @@ components:
       x-skaffolder-resource: 
       x-skaffolder-services: 
       x-skaffolder-nesteds: 
+      x-skaffolder-links:
+        - 5e927e85c4c4454b7744a8f2
+      x-skaffolder-roles: []
+    - x-skaffolder-id: 5e92f53ec4c4454b7744abc5
+      x-skaffolder-name: artEdit
+      x-skaffolder-url: /arts/{id}
+      x-skaffolder-template: Edit_Crud
+      x-skaffolder-resource: 5e927e67c4c4454b7744a8e9
+      x-skaffolder-services:
+        - 5e92f53ec4c4454b7744abc6
+        - 5e92f53ec4c4454b7744abc7
+        - 5e92f53ec4c4454b7744abc8
+      x-skaffolder-nesteds: 
       x-skaffolder-links: 
       x-skaffolder-roles: []
     - x-skaffolder-id: 5e927e85c4c4454b7744a8f2
@@ -423,7 +537,8 @@ components:
         - 5e927e77c4c4454b7744a8ef
         - 5e927e77c4c4454b7744a8f0
       x-skaffolder-nesteds: 
-      x-skaffolder-links: 
+      x-skaffolder-links:
+        - 5e92f53ec4c4454b7744abc5
       x-skaffolder-roles: []
   x-skaffolder-roles: 
     - x-skaffolder-id: 5e927b7dc4c4454b7744a85e
